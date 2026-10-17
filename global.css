@@ -39,14 +39,22 @@
     --color-background: #FFFFFF;
 
     /* --- Font families (mapped to expo-font keys) --- */
-    --font-regular: "Poppins-Regular";
-    --font-medium: "Poppins-Medium";
-    --font-semibold: "Poppins-SemiBold";
-    --font-bold: "Poppins-Bold";
-    --font-family-regular: "Poppins-Regular";
-    --font-family-medium: "Poppins-Medium";
-    --font-family-semibold: "Poppins-SemiBold";
-    --font-family-bold: "Poppins-Bold";
+    --font-regular: "FZPoppins-Regular";
+    --font-medium: "FZPoppins-Medium";
+    --font-semibold: "FZPoppins-SemiBold";
+    --font-bold: "FZPoppins-Bold";
+    --font-family-regular: "FZPoppins-Regular";
+    --font-family-medium: "FZPoppins-Medium";
+    --font-family-semibold: "FZPoppins-SemiBold";
+    --font-family-bold: "FZPoppins-Bold";
+    --font-fzpoppins-regular: "FZPoppins-Regular";
+    --font-fzpoppins-medium: "FZPoppins-Medium";
+    --font-fzpoppins-semibold: "FZPoppins-SemiBold";
+    --font-fzpoppins-bold: "FZPoppins-Bold";
+    --font-poppins-regular: "FZPoppins-Regular";
+    --font-poppins-medium: "FZPoppins-Medium";
+    --font-poppins-semibold: "FZPoppins-SemiBold";
+    --font-poppins-bold: "FZPoppins-Bold";
 
     /* --- Spacing (4-point grid) --- */
     --spacing-xs: 4px;
@@ -94,19 +102,23 @@
   --color-surface: #F6F7FB;
   --color-background: #FFFFFF;
 
-  /* Font families — generates font-regular, font-medium, font-semibold, font-bold */
-  --font-regular: "Poppins-Regular";
-  --font-medium: "Poppins-Medium";
-  --font-semibold: "Poppins-SemiBold";
-  --font-bold: "Poppins-Bold";
-  --font-poppins-regular: "Poppins-Regular";
-  --font-poppins-medium: "Poppins-Medium";
-  --font-poppins-semibold: "Poppins-SemiBold";
-  --font-poppins-bold: "Poppins-Bold";
-  --font-family-regular: "Poppins-Regular";
-  --font-family-medium: "Poppins-Medium";
-  --font-family-semibold: "Poppins-SemiBold";
-  --font-family-bold: "Poppins-Bold";
+  /* Font families — generates font-regular, font-medium, font-semibold, font-bold, font-fzpoppins-*, font-poppins-* */
+  --font-regular: "FZPoppins-Regular";
+  --font-medium: "FZPoppins-Medium";
+  --font-semibold: "FZPoppins-SemiBold";
+  --font-bold: "FZPoppins-Bold";
+  --font-family-regular: "FZPoppins-Regular";
+  --font-family-medium: "FZPoppins-Medium";
+  --font-family-semibold: "FZPoppins-SemiBold";
+  --font-family-bold: "FZPoppins-Bold";
+  --font-fzpoppins-regular: "FZPoppins-Regular";
+  --font-fzpoppins-medium: "FZPoppins-Medium";
+  --font-fzpoppins-semibold: "FZPoppins-SemiBold";
+  --font-fzpoppins-bold: "FZPoppins-Bold";
+  --font-poppins-regular: "FZPoppins-Regular";
+  --font-poppins-medium: "FZPoppins-Medium";
+  --font-poppins-semibold: "FZPoppins-SemiBold";
+  --font-poppins-bold: "FZPoppins-Bold";
 }
 
 /* ---------------------------------------------------------

@@ -1,5 +1,6 @@
-import { ScrollView, Text, View, Image } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 import { images } from "@/constants/images";
 import { colors } from "@/constants/theme";
 
@@ -94,6 +95,8 @@ const TYPE_SCALE = [
 ];
 
 export default function Index() {
+  const router = useRouter();
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface }}>
       <ScrollView
@@ -112,6 +115,37 @@ export default function Index() {
             <Text className="caption font-semibold text-ink">SDK 57 • NativeWind</Text>
           </View>
         </View>
+
+        {/* ONBOARDING SCREEN NAVIGATION LINK */}
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => router.push("/onboarding")}
+          className="bg-cream rounded-3xl p-5 mb-6 shadow-sm border border-[#FFB873]/50 flex-row items-center justify-between"
+        >
+          <View className="flex-row items-center flex-1 mr-3">
+            <View className="w-12 h-12 rounded-2xl bg-[#FFE69B] items-center justify-center mr-3 border border-[#FFB873]/30 overflow-hidden">
+              <Image
+                source={images.onboardingHero}
+                style={{ width: 36, height: 36 }}
+                resizeMode="contain"
+              />
+            </View>
+            <View className="flex-1">
+              <View className="flex-row items-center">
+                <Text className="h4 text-ink">Onboarding Screen</Text>
+                <View className="ml-2 px-2 py-0.5 rounded-full bg-orange">
+                  <Text className="caption font-bold text-ink">NEW</Text>
+                </View>
+              </View>
+              <Text className="body-small text-muted mt-0.5">
+                Nấu ngon mỗi ngày • Welcome flow
+              </Text>
+            </View>
+          </View>
+          <View className="h-10 px-4 rounded-full bg-[#FEB11F] items-center justify-center shadow-sm">
+            <Text className="caption font-bold text-white">Open →</Text>
+          </View>
+        </TouchableOpacity>
 
         {/* 1. BRAND SECTION */}
         <View className="bg-background rounded-3xl p-6 mb-6 shadow-sm border border-border">
@@ -202,9 +236,9 @@ export default function Index() {
           <Text className="caption font-medium uppercase tracking-wider text-muted">
             Font Family
           </Text>
-          <Text className="h1 text-ink mt-1 mb-2">Poppins</Text>
+          <Text className="h1 text-ink mt-1 mb-2">FZ Poppins</Text>
           <Text className="body-medium text-muted mb-6">
-            Poppins is a modern, geometric sans-serif typeface that provides excellent readability and a friendly personality.
+            FZ Poppins is a modern, geometric sans-serif typeface with full Vietnamese diacritics support that provides excellent readability and an appetizing, friendly personality.
           </Text>
 
           {/* Type Scale Specimen List */}
