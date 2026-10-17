@@ -2,7 +2,7 @@
  * Simply Cook – Typography Tokens
  * Source of truth: design-system spec (01-design-system.png)
  *
- * Font family: Poppins (loaded via expo-font in _layout.tsx)
+ * Font family: FZ Poppins (loaded via expo-font in _layout.tsx)
  * Weights available: Regular (400), Medium (500), SemiBold (600), Bold (700)
  *
  * Rule: fontFamily drives weight on native (iOS/Android).
@@ -15,10 +15,10 @@ import { colors } from "./colors";
 // Font family map (mirrors file names in assets/fonts/)
 // ---------------------------------------------------------------------------
 export const fontFamily = {
-  regular: "Poppins-Regular",
-  medium: "Poppins-Medium",
-  semibold: "Poppins-SemiBold",
-  bold: "Poppins-Bold",
+  regular: "FZPoppins-Regular",
+  medium: "FZPoppins-Medium",
+  semibold: "FZPoppins-SemiBold",
+  bold: "FZPoppins-Bold",
 } as const;
 
 // ---------------------------------------------------------------------------

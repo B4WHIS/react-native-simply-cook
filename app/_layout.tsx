@@ -11,10 +11,20 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
-    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
-    "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
-    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+    // Primary FZ Poppins font keys
+    "FZPoppins-Regular": require("../assets/fonts/FZ Poppins-Regular.ttf"),
+    "FZPoppins-Medium": require("../assets/fonts/FZ Poppins-Medium.ttf"),
+    "FZPoppins-SemiBold": require("../assets/fonts/FZ Poppins-SemiBold.ttf"),
+    "FZPoppins-Bold": require("../assets/fonts/FZ Poppins-Bold.ttf"),
+    // Registered aliases for format variations & backwards compatibility
+    "FZ Poppins-Regular": require("../assets/fonts/FZ Poppins-Regular.ttf"),
+    "FZ Poppins-Medium": require("../assets/fonts/FZ Poppins-Medium.ttf"),
+    "FZ Poppins-SemiBold": require("../assets/fonts/FZ Poppins-SemiBold.ttf"),
+    "FZ Poppins-Bold": require("../assets/fonts/FZ Poppins-Bold.ttf"),
+    "Poppins-Regular": require("../assets/fonts/FZ Poppins-Regular.ttf"),
+    "Poppins-Medium": require("../assets/fonts/FZ Poppins-Medium.ttf"),
+    "Poppins-SemiBold": require("../assets/fonts/FZ Poppins-SemiBold.ttf"),
+    "Poppins-Bold": require("../assets/fonts/FZ Poppins-Bold.ttf"),
   });
 
   useEffect(() => {
