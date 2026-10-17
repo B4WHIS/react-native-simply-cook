@@ -1,0 +1,222 @@
+/* =========================================================
+   Simply Cook – Global CSS
+   Design tokens as CSS custom properties + NativeWind utilities
+   Source: 01-design-system.png
+   ========================================================= */
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+/* ---------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   Raw values available as var(--*) anywhere in the app.
+   --------------------------------------------------------- */
+@layer theme {
+  :root {
+    /* --- Primary palette --- */
+    --color-green: #B7E8A0;
+    --color-yellow: #FFE69B;
+    --color-orange: #FFB873;
+    --color-cream: #FFF6E6;
+
+    /* --- Semantic / status --- */
+    --color-success: #21C16B;
+    --color-warning: #FFC800;
+    --color-streak: #FF8A00;
+    --color-error: #FF4D4F;
+    --color-info: #4D8BFF;
+
+    /* --- Neutrals --- */
+    --color-ink: #0D132B;
+    --color-text-primary: #0D132B;
+    --color-muted: #6B7280;
+    --color-text-secondary: #6B7280;
+    --color-border: #E5E7EB;
+    --color-surface: #F6F7FB;
+    --color-background: #FFFFFF;
+
+    /* --- Font families (mapped to expo-font keys) --- */
+    --font-regular: "Poppins-Regular";
+    --font-medium: "Poppins-Medium";
+    --font-semibold: "Poppins-SemiBold";
+    --font-bold: "Poppins-Bold";
+    --font-family-regular: "Poppins-Regular";
+    --font-family-medium: "Poppins-Medium";
+    --font-family-semibold: "Poppins-SemiBold";
+    --font-family-bold: "Poppins-Bold";
+
+    /* --- Spacing (4-point grid) --- */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* --- Border radius --- */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-xxl: 24px;
+    --radius-full: 9999px;
+  }
+}
+
+/* ---------------------------------------------------------
+   2. TAILWIND v4 THEME EXTENSION
+   Registers tokens so NativeWind className="" resolves them.
+   --------------------------------------------------------- */
+@theme {
+  /* Primary colors */
+  --color-green: #B7E8A0;
+  --color-yellow: #FFE69B;
+  --color-orange: #FFB873;
+  --color-cream: #FFF6E6;
+
+  /* Semantic / status colors */
+  --color-success: #21C16B;
+  --color-warning: #FFC800;
+  --color-streak: #FF8A00;
+  --color-error: #FF4D4F;
+  --color-info: #4D8BFF;
+
+  /* Neutrals */
+  --color-ink: #0D132B;
+  --color-text-primary: #0D132B;
+  --color-muted: #6B7280;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --color-surface: #F6F7FB;
+  --color-background: #FFFFFF;
+
+  /* Font families — generates font-regular, font-medium, font-semibold, font-bold */
+  --font-regular: "Poppins-Regular";
+  --font-medium: "Poppins-Medium";
+  --font-semibold: "Poppins-SemiBold";
+  --font-bold: "Poppins-Bold";
+  --font-poppins-regular: "Poppins-Regular";
+  --font-poppins-medium: "Poppins-Medium";
+  --font-poppins-semibold: "Poppins-SemiBold";
+  --font-poppins-bold: "Poppins-Bold";
+  --font-family-regular: "Poppins-Regular";
+  --font-family-medium: "Poppins-Medium";
+  --font-family-semibold: "Poppins-SemiBold";
+  --font-family-bold: "Poppins-Bold";
+}
+
+/* ---------------------------------------------------------
+   3. BASE STYLES
+   --------------------------------------------------------- */
+@layer base {
+  * {
+    color: var(--color-ink);
+  }
+}
+
+/* ---------------------------------------------------------
+   4. TYPOGRAPHY UTILITIES
+   Usage: className="h1" | "h2" | "body-large" | "caption"
+          or "text-h1" | "text-h2" etc.
+   Source: 01-design-system.png type scale
+   --------------------------------------------------------- */
+
+/* H1 – Page / Screen Title: 32px Bold, line-height 1.2 (= 38.4px) */
+@utility h1 {
+  font-family: var(--font-bold);
+  font-size: 32px;
+  line-height: 38.4px;
+}
+@utility text-h1 {
+  font-family: var(--font-bold);
+  font-size: 32px;
+  line-height: 38.4px;
+}
+
+/* H2 – Section Title: 24px SemiBold, line-height 1.3 (= 31.2px) */
+@utility h2 {
+  font-family: var(--font-semibold);
+  font-size: 24px;
+  line-height: 31.2px;
+}
+@utility text-h2 {
+  font-family: var(--font-semibold);
+  font-size: 24px;
+  line-height: 31.2px;
+}
+
+/* H3 – Card / Module Title: 20px SemiBold, line-height 1.3 (= 26px) */
+@utility h3 {
+  font-family: var(--font-semibold);
+  font-size: 20px;
+  line-height: 26px;
+}
+@utility text-h3 {
+  font-family: var(--font-semibold);
+  font-size: 20px;
+  line-height: 26px;
+}
+
+/* H4 – Subheading: 16px Medium, line-height 1.4 (= 22.4px) */
+@utility h4 {
+  font-family: var(--font-medium);
+  font-size: 16px;
+  line-height: 22.4px;
+}
+@utility text-h4 {
+  font-family: var(--font-medium);
+  font-size: 16px;
+  line-height: 22.4px;
+}
+
+/* Body Large – Important content: 16px Regular, line-height 1.6 (= 25.6px) */
+@utility body-large {
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 25.6px;
+}
+@utility text-body-large {
+  font-family: var(--font-regular);
+  font-size: 16px;
+  line-height: 25.6px;
+}
+
+/* Body Medium – Body text: 14px Regular, line-height 1.6 (= 22.4px) */
+@utility body-medium {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  line-height: 22.4px;
+}
+@utility text-body-medium {
+  font-family: var(--font-regular);
+  font-size: 14px;
+  line-height: 22.4px;
+}
+
+/* Body Small – Supporting text: 13px Regular, line-height 1.6 (= 20.8px) */
+@utility body-small {
+  font-family: var(--font-regular);
+  font-size: 13px;
+  line-height: 20.8px;
+}
+@utility text-body-small {
+  font-family: var(--font-regular);
+  font-size: 13px;
+  line-height: 20.8px;
+}
+
+/* Caption – Labels, meta text: 11px Regular, line-height 1.4 (= 15.4px) */
+@utility caption {
+  font-family: var(--font-regular);
+  font-size: 11px;
+  line-height: 15.4px;
+}
+@utility text-caption {
+  font-family: var(--font-regular);
+  font-size: 11px;
+  line-height: 15.4px;
+}
