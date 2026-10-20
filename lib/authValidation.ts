@@ -12,9 +12,10 @@ export function validateEmail(
 export function validatePassword(
   password: string,
   emptyMessage: string,
-  shortMessage: string
+  shortMessage: string,
+  minLength: number = 6
 ) {
   if (!password) return emptyMessage;
-  if (password.length < 6) return shortMessage;
+  if (password.length < minLength) return shortMessage;
   return "";
 }
