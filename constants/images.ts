@@ -16,6 +16,8 @@ const images = {
   // ---- Onboarding / Auth ----
   onboardingHero: require("../assets/images/onboarding-hero.png"),
   authHero: require("../assets/images/auth-hero.png"),
+  authChick: require("../assets/images/auth-chick.png"),
+  googleIcon: require("../assets/images/google-icon.png"),
 
   // ---- Empty states ----
   emptyFridge: require("../assets/images/empty-fridge.png"),

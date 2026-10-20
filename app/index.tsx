@@ -120,7 +120,7 @@ export default function Index() {
         <TouchableOpacity
           activeOpacity={0.85}
           onPress={() => router.push("/onboarding")}
-          className="bg-cream rounded-3xl p-5 mb-6 shadow-sm border border-[#FFB873]/50 flex-row items-center justify-between"
+          className="bg-cream rounded-3xl p-5 mb-3 shadow-sm border border-[#FFB873]/50 flex-row items-center justify-between"
         >
           <View className="flex-row items-center flex-1 mr-3">
             <View className="w-12 h-12 rounded-2xl bg-[#FFE69B] items-center justify-center mr-3 border border-[#FFB873]/30 overflow-hidden">
@@ -133,9 +133,6 @@ export default function Index() {
             <View className="flex-1">
               <View className="flex-row items-center">
                 <Text className="h4 text-ink">Onboarding Screen</Text>
-                <View className="ml-2 px-2 py-0.5 rounded-full bg-orange">
-                  <Text className="caption font-bold text-ink">NEW</Text>
-                </View>
               </View>
               <Text className="body-small text-muted mt-0.5">
                 Nấu ngon mỗi ngày • Welcome flow
@@ -146,6 +143,59 @@ export default function Index() {
             <Text className="caption font-bold text-white">Open →</Text>
           </View>
         </TouchableOpacity>
+
+        {/* AUTH SCREENS NAVIGATION LINKS */}
+        <View className="flex-row items-center justify-between mb-6 space-x-3">
+          <TouchableOpacity
+            activeOpacity={0.85}
+            onPress={() => router.push("/(auth)/sign-up")}
+            className="flex-1 bg-white rounded-3xl p-4 mr-1.5 shadow-sm border border-border flex-row items-center justify-between"
+          >
+            <View className="flex-row items-center flex-1">
+              <View className="w-10 h-10 rounded-2xl bg-[#FFE69B]/40 items-center justify-center mr-2.5 overflow-hidden">
+                <Image
+                  source={images.authChick}
+                  style={{ width: 28, height: 28 }}
+                  resizeMode="contain"
+                />
+              </View>
+              <View className="flex-1">
+                <View className="items-start">
+                  <Text className="font-bold text-sm text-ink">Sign Up</Text>
+                  <View className="mt-1 px-1.5 py-0.2 rounded-full bg-orange">
+                    <Text className="caption font-bold text-[10px] text-ink">NEW</Text>
+                  </View>
+                </View>
+                <Text className="caption text-muted">Tạo tài khoản</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.85}
+            onPress={() => router.push("/(auth)/sign-in")}
+            className="flex-1 bg-white rounded-3xl p-4 ml-1.5 shadow-sm border border-border flex-row items-center justify-between"
+          >
+            <View className="flex-row items-center flex-1">
+              <View className="w-10 h-10 rounded-2xl bg-[#FFE69B]/40 items-center justify-center mr-2.5 overflow-hidden">
+                <Image
+                  source={images.authChick}
+                  style={{ width: 28, height: 28 }}
+                  resizeMode="contain"
+                />
+              </View>
+              <View className="flex-1">
+                <View className="items-start">
+                  <Text className="font-bold text-sm text-ink">Sign In</Text>
+                  <View className="mt-1 px-1.5 py-0.2 rounded-full bg-orange">
+                    <Text className="caption font-bold text-[10px] text-ink">NEW</Text>
+                  </View>
+                </View>
+                <Text className="caption text-muted">Chào mừng trở lại</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
 
         {/* 1. BRAND SECTION */}
         <View className="bg-background rounded-3xl p-6 mb-6 shadow-sm border border-border">
