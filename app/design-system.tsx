@@ -1,8 +1,8 @@
 import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
-import { useAuth, useUser, useClerk } from "@clerk/expo";
-import OnboardingScreen from "./onboarding";
+import { useUser, useClerk } from "@clerk/expo";
+import { Ionicons } from "@expo/vector-icons";
 import { images } from "@/constants/images";
 import { colors } from "@/constants/theme";
 
@@ -96,19 +96,10 @@ const TYPE_SCALE = [
   },
 ];
 
-export default function Index() {
+export default function DesignSystemScreen() {
   const router = useRouter();
-  const { isLoaded, isSignedIn } = useAuth();
   const { user } = useUser();
   const { signOut } = useClerk();
-
-  if (!isLoaded) {
-    return null;
-  }
-
-  if (!isSignedIn) {
-    return <OnboardingScreen />;
-  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface }}>
@@ -116,26 +107,35 @@ export default function Index() {
         contentContainerStyle={{ padding: 20, paddingBottom: 48 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Header */}
-        <View className="mb-6 flex-row items-center justify-between">
-          <View>
-            <Text className="caption font-medium uppercase tracking-widest text-muted">
-              Design System Spec
-            </Text>
-            <Text className="h1 text-ink mt-1">Simply Cook</Text>
-          </View>
+        {/* Back bar */}
+        <View className="mb-4 flex-row items-center justify-between">
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => router.back()}
+            className="w-10 h-10 rounded-full bg-white border border-border items-center justify-center shadow-xs"
+          >
+            <Ionicons name="arrow-back" size={20} color="#0D132B" />
+          </TouchableOpacity>
           <View className="flex-row items-center gap-2">
-            <View className="h-10 px-3 bg-green rounded-full flex-row items-center justify-center">
+            <View className="h-9 px-3 bg-green rounded-full flex-row items-center justify-center">
               <Text className="caption font-semibold text-ink">SDK 57 • NativeWind</Text>
             </View>
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => signOut()}
-              className="h-10 px-3 bg-white border border-border rounded-full flex-row items-center justify-center shadow-xs"
+              className="h-9 px-3 bg-white border border-border rounded-full flex-row items-center justify-center shadow-xs"
             >
               <Text className="caption font-semibold text-error">Đăng xuất</Text>
             </TouchableOpacity>
           </View>
+        </View>
+
+        {/* Header */}
+        <View className="mb-6">
+          <Text className="caption font-medium uppercase tracking-widest text-muted">
+            Design System Spec
+          </Text>
+          <Text className="h1 text-ink mt-1">Simply Cook</Text>
         </View>
 
         {/* User Profile Card */}
@@ -158,87 +158,6 @@ export default function Index() {
           <View className="px-2.5 py-1 rounded-full bg-[#E8F8EE] border border-success/30">
             <Text className="caption font-bold text-success">Online</Text>
           </View>
-        </View>
-
-        {/* ONBOARDING SCREEN NAVIGATION LINK */}
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => router.push("/onboarding")}
-          className="bg-cream rounded-3xl p-5 mb-3 shadow-sm border border-[#FFB873]/50 flex-row items-center justify-between"
-        >
-          <View className="flex-row items-center flex-1 mr-3">
-            <View className="w-12 h-12 rounded-2xl bg-[#FFE69B] items-center justify-center mr-3 border border-[#FFB873]/30 overflow-hidden">
-              <Image
-                source={images.onboardingHero}
-                style={{ width: 36, height: 36 }}
-                resizeMode="contain"
-              />
-            </View>
-            <View className="flex-1">
-              <View className="flex-row items-center">
-                <Text className="h4 text-ink">Onboarding Screen</Text>
-              </View>
-              <Text className="body-small text-muted mt-0.5">
-                Nấu ngon mỗi ngày • Welcome flow
-              </Text>
-            </View>
-          </View>
-          <View className="h-10 px-4 rounded-full bg-[#FEB11F] items-center justify-center shadow-sm">
-            <Text className="caption font-bold text-white">Open →</Text>
-          </View>
-        </TouchableOpacity>
-
-        {/* AUTH SCREENS NAVIGATION LINKS */}
-        <View className="flex-row items-center justify-between mb-6 space-x-3">
-          <TouchableOpacity
-            activeOpacity={0.85}
-            onPress={() => router.push("/(auth)/sign-up")}
-            className="flex-1 bg-white rounded-3xl p-4 mr-1.5 shadow-sm border border-border flex-row items-center justify-between"
-          >
-            <View className="flex-row items-center flex-1">
-              <View className="w-10 h-10 rounded-2xl bg-[#FFE69B]/40 items-center justify-center mr-2.5 overflow-hidden">
-                <Image
-                  source={images.authChick}
-                  style={{ width: 28, height: 28 }}
-                  resizeMode="contain"
-                />
-              </View>
-              <View className="flex-1">
-                <View className="items-start">
-                  <Text className="font-bold text-sm text-ink">Sign Up</Text>
-                  <View className="mt-1 px-1.5 py-0.2 rounded-full bg-orange">
-                    <Text className="caption font-bold text-[10px] text-ink">NEW</Text>
-                  </View>
-                </View>
-                <Text className="caption text-muted">Tạo tài khoản</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            activeOpacity={0.85}
-            onPress={() => router.push("/(auth)/sign-in")}
-            className="flex-1 bg-white rounded-3xl p-4 ml-1.5 shadow-sm border border-border flex-row items-center justify-between"
-          >
-            <View className="flex-row items-center flex-1">
-              <View className="w-10 h-10 rounded-2xl bg-[#FFE69B]/40 items-center justify-center mr-2.5 overflow-hidden">
-                <Image
-                  source={images.authChick}
-                  style={{ width: 28, height: 28 }}
-                  resizeMode="contain"
-                />
-              </View>
-              <View className="flex-1">
-                <View className="items-start">
-                  <Text className="font-bold text-sm text-ink">Sign In</Text>
-                  <View className="mt-1 px-1.5 py-0.2 rounded-full bg-orange">
-                    <Text className="caption font-bold text-[10px] text-ink">NEW</Text>
-                  </View>
-                </View>
-                <Text className="caption text-muted">Chào mừng trở lại</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
         </View>
 
         {/* 1. BRAND SECTION */}
