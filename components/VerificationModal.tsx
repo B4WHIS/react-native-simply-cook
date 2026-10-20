@@ -19,21 +19,28 @@ interface VerificationModalProps {
   email: string;
   onClose: () => void;
   onSuccess?: () => void;
+  onVerify?: (code: string) => Promise<{ error?: string } | void>;
+  onResend?: () => Promise<{ error?: string } | void>;
 }
 
 function ModalBody({
   email,
   onClose,
   onSuccess,
+  onVerify,
+  onResend,
 }: {
   email: string;
   onClose: () => void;
   onSuccess?: () => void;
+  onVerify?: (code: string) => Promise<{ error?: string } | void>;
+  onResend?: () => Promise<{ error?: string } | void>;
 }) {
   const router = useRouter();
   const [code, setCode] = useState("");
   const [resendSeconds, setResendSeconds] = useState(45);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const inputRef = useRef<TextInput>(null);
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -57,15 +64,35 @@ function ModalBody({
     };
   }, []);
 
-  const handleCodeChange = (text: string) => {
+  const handleCodeChange = async (text: string) => {
     if (isVerifying) return;
 
     const cleaned = text.replace(/[^0-9]/g, "").slice(0, 6);
     setCode(cleaned);
+    setErrorMessage("");
 
     if (cleaned.length === 6) {
       setIsVerifying(true);
       Keyboard.dismiss();
+
+      if (onVerify) {
+        try {
+          const res = await onVerify(cleaned);
+          if (res && res.error) {
+            setIsVerifying(false);
+            setErrorMessage(res.error);
+            setCode("");
+            inputRef.current?.focus();
+            return;
+          }
+        } catch (err: any) {
+          setIsVerifying(false);
+          setErrorMessage(err.message || "Xác thực thất bại");
+          setCode("");
+          inputRef.current?.focus();
+          return;
+        }
+      }
 
       successTimeoutRef.current = setTimeout(() => {
         if (successTimeoutRef.current) {
@@ -82,10 +109,21 @@ function ModalBody({
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     if (resendSeconds > 0) return;
     setResendSeconds(45);
     setCode("");
+    setErrorMessage("");
+    if (onResend) {
+      try {
+        const res = await onResend();
+        if (res && res.error) {
+          setErrorMessage(res.error);
+        }
+      } catch (err: any) {
+        setErrorMessage(err.message || "Không thể gửi lại mã");
+      }
+    }
     inputRef.current?.focus();
   };
 
@@ -201,6 +239,13 @@ function ModalBody({
             Xác thực thành công! Đang chuyển hướng...
           </Text>
         </View>
+      ) : errorMessage ? (
+        <View className="flex-row items-center justify-center mb-3 px-2">
+          <Feather name="alert-circle" size={16} color="#FF4D4F" />
+          <Text className="font-medium text-xs text-error ml-1.5 text-center">
+            {errorMessage}
+          </Text>
+        </View>
       ) : (
         <Text className="font-regular text-xs text-muted text-center mb-4">
           Nhập đủ 6 số để tự động đăng nhập
@@ -231,6 +276,8 @@ export function VerificationModal({
   email,
   onClose,
   onSuccess,
+  onVerify,
+  onResend,
 }: VerificationModalProps) {
   if (!visible) return null;
 
@@ -261,6 +308,8 @@ export function VerificationModal({
                 email={email}
                 onClose={onClose}
                 onSuccess={onSuccess}
+                onVerify={onVerify}
+                onResend={onResend}
               />
             </TouchableWithoutFeedback>
           </View>

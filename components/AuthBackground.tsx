@@ -61,12 +61,13 @@ export function AuthBackground() {
       <View
         style={{
           position: "absolute",
-          bottom: 95,
-          left: 28,
+          bottom: 45,
+          left: 20,
           width: 11,
           height: 22,
           borderRadius: 6,
           backgroundColor: "#FED885",
+          opacity: 0.65,
           transform: [{ rotate: "45deg" }],
         }}
       />

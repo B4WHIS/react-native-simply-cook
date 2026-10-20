@@ -1,6 +1,8 @@
 import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useAuth, useUser, useClerk } from "@clerk/expo";
+import OnboardingScreen from "./onboarding";
 import { images } from "@/constants/images";
 import { colors } from "@/constants/theme";
 
@@ -96,6 +98,17 @@ const TYPE_SCALE = [
 
 export default function Index() {
   const router = useRouter();
+  const { isLoaded, isSignedIn } = useAuth();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  if (!isSignedIn) {
+    return <OnboardingScreen />;
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface }}>
@@ -111,8 +124,39 @@ export default function Index() {
             </Text>
             <Text className="h1 text-ink mt-1">Simply Cook</Text>
           </View>
-          <View className="h-10 px-3 bg-green rounded-full flex-row items-center justify-center">
-            <Text className="caption font-semibold text-ink">SDK 57 • NativeWind</Text>
+          <View className="flex-row items-center gap-2">
+            <View className="h-10 px-3 bg-green rounded-full flex-row items-center justify-center">
+              <Text className="caption font-semibold text-ink">SDK 57 • NativeWind</Text>
+            </View>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => signOut()}
+              className="h-10 px-3 bg-white border border-border rounded-full flex-row items-center justify-center shadow-xs"
+            >
+              <Text className="caption font-semibold text-error">Đăng xuất</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* User Profile Card */}
+        <View className="bg-white rounded-3xl p-4 mb-4 shadow-sm border border-border flex-row items-center justify-between">
+          <View className="flex-row items-center flex-1 mr-2">
+            <View className="w-10 h-10 rounded-full bg-[#FFE69B] items-center justify-center mr-3">
+              <Text className="font-bold text-ink">
+                {(user?.firstName?.[0] || user?.primaryEmailAddress?.emailAddress?.[0] || "U").toUpperCase()}
+              </Text>
+            </View>
+            <View className="flex-1">
+              <Text className="font-bold text-sm text-ink" numberOfLines={1}>
+                {user?.fullName || "Người dùng"}
+              </Text>
+              <Text className="caption text-muted" numberOfLines={1}>
+                {user?.primaryEmailAddress?.emailAddress || "Đã xác thực"}
+              </Text>
+            </View>
+          </View>
+          <View className="px-2.5 py-1 rounded-full bg-[#E8F8EE] border border-success/30">
+            <Text className="caption font-bold text-success">Online</Text>
           </View>
         </View>
 
