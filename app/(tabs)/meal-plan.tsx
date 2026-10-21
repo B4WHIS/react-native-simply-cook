@@ -10,16 +10,10 @@ export default function MealPlanScreen() {
         <View className="w-16 h-16 rounded-full bg-[#FFE69B]/50 items-center justify-center mb-4 border border-[#FFB873]/30">
           <MaterialCommunityIcons name="calendar-heart" size={32} color="#FFA927" />
         </View>
-        <Text
-          className="text-2xl font-bold text-ink mb-2"
-          style={{ fontFamily: "FZPoppins-Bold" }}
-        >
+        <Text className="text-2xl font-bold text-ink mb-2">
           Thực đơn tuần
         </Text>
-        <Text
-          className="text-sm text-muted text-center max-w-[280px]"
-          style={{ fontFamily: "FZPoppins-Regular" }}
-        >
+        <Text className="text-sm text-muted text-center max-w-[280px] font-regular">
           Lên kế hoạch nấu ăn khoa học từ thứ Hai đến Chủ Nhật cho cả nhà.
         </Text>
       </View>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { images } from "@/constants/images";
 import type { Recipe } from "@/types/recipe";
+import { useFavoritesStore } from "@/store/useFavoritesStore";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -23,19 +24,21 @@ export function RecipeCard({
   onToggleFavorite,
   onPress,
 }: RecipeCardProps) {
-  // Support both controlled and uncontrolled favorite toggle
-  const [internalFavorite, setInternalFavorite] = useState(
-    recipe.id === "thit-kho-trung" || recipe.id === "bo-xao-bong-cai"
+  const isStoredFavorite = useFavoritesStore((state) =>
+    state.favoriteRecipeIds.includes(recipe.id)
+  );
+  const toggleFavoriteInStore = useFavoritesStore(
+    (state) => state.toggleFavorite
   );
 
   const isFavorite =
-    externalIsFavorite !== undefined ? externalIsFavorite : internalFavorite;
+    externalIsFavorite !== undefined ? externalIsFavorite : isStoredFavorite;
 
   const handleFavoritePress = () => {
     if (onToggleFavorite) {
       onToggleFavorite(recipe.id);
     } else {
-      setInternalFavorite((prev) => !prev);
+      toggleFavoriteInStore(recipe.id);
     }
   };
 
@@ -90,7 +93,6 @@ export function RecipeCard({
           <Text
             className="font-bold text-[14px] text-ink text-center leading-[19px]"
             numberOfLines={2}
-            style={{ fontFamily: "FZPoppins-Bold" }}
           >
             {recipe.title}
           </Text>
@@ -101,10 +103,7 @@ export function RecipeCard({
           {/* Cook time */}
           <View className="flex-row items-center gap-1">
             <Ionicons name="time-outline" size={14} color="#6B7280" />
-            <Text
-              className="text-[12px] text-muted font-medium"
-              style={{ fontFamily: "FZPoppins-Medium" }}
-            >
+            <Text className="text-[12px] text-muted font-medium">
               {recipe.cookTimeMinutes} phút
             </Text>
           </View>
@@ -112,10 +111,7 @@ export function RecipeCard({
           {/* Rating */}
           <View className="flex-row items-center gap-1">
             <Ionicons name="star" size={13} color="#FEB11F" />
-            <Text
-              className="text-[12px] text-ink font-bold"
-              style={{ fontFamily: "FZPoppins-Bold" }}
-            >
+            <Text className="text-[12px] text-ink font-bold">
               {recipe.rating ?? 4.8}
             </Text>
           </View>

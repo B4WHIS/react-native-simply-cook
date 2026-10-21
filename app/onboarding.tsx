@@ -37,7 +37,7 @@ export default function OnboardingScreen() {
           <View className="w-11 h-11 rounded-full overflow-hidden bg-[#FFF9EE] mr-2.5 border border-[#FFE69B] items-center justify-center">
             <Image
               source={images.logo}
-              style={{ width: 34, height: 34 }}
+              className="w-[34px] h-[34px]"
               resizeMode="contain"
               accessibilityLabel="Simply Cook logo"
             />
@@ -55,8 +55,7 @@ export default function OnboardingScreen() {
               numberOfLines={1}
               adjustsFontSizeToFit
               minimumFontScale={0.85}
-              style={{ fontSize: 34, lineHeight: 52, paddingTop: 8, paddingBottom: 4 }}
-              className="font-bold text-center tracking-tight"
+              className="font-bold text-center tracking-tight text-[34px] leading-[52px] pt-2 pb-1"
             >
               <Text className="text-ink">Nấu ngon </Text>
               <Text className="text-[#D97706]">mỗi ngày</Text>
@@ -71,7 +70,7 @@ export default function OnboardingScreen() {
           <View className="w-full max-w-[340px] items-center justify-center">
             <Image
               source={images.onboardingHero}
-              style={{ width: "100%", height: 260 }}
+              className="w-full h-[260px]"
               resizeMode="contain"
               accessibilityElementsHidden={true}
               importantForAccessibility="no"

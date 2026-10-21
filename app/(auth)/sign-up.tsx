@@ -271,18 +271,14 @@ export default function SignUpScreen() {
             <View className="w-full items-center">
               <Image
                 source={images.authChick}
-                style={{
-                  width: isKeyboardVisible ? 110 : 190,
-                  height: isKeyboardVisible ? 75 : 135,
-                }}
+                className={
+                  isKeyboardVisible ? "w-[110px] h-[75px]" : "w-[190px] h-[135px]"
+                }
                 resizeMode="contain"
                 accessibilityElementsHidden
                 importantForAccessibility="no"
               />
-              <Text
-                className="font-bold text-2xl text-ink text-center tracking-tight mt-0.5"
-                style={{ lineHeight: 32, paddingTop: 2 }}
-              >
+              <Text className="font-bold text-2xl text-ink text-center tracking-tight mt-0.5 leading-8 pt-0.5">
                 Tạo tài khoản <Text className="text-[#D97706]">mới</Text>
               </Text>
             </View>

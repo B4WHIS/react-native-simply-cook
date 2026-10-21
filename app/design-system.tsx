@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter, Redirect } from "expo-router";
@@ -5,6 +6,7 @@ import { useUser, useClerk, useAuth } from "@clerk/expo";
 import { Ionicons } from "@expo/vector-icons";
 import { images } from "@/constants/images";
 import { colors } from "@/constants/theme";
+import { useFavoritesStore } from "@/store/useFavoritesStore";
 
 const PRIMARY_COLORS = [
   { name: "LINGUA GREEN", hex: "#B7E8A0", bgClass: "bg-green" },
@@ -102,6 +104,27 @@ export default function DesignSystemScreen() {
   const { user } = useUser();
   const { signOut } = useClerk();
 
+  const favoriteRecipeIds = useFavoritesStore((state) => state.favoriteRecipeIds);
+  const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
+
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+
+  const handleClearFavorites = () => {
+    clearFavorites();
+    setFeedbackMessage("Đã xóa toàn bộ favorites trong AsyncStorage!");
+    setTimeout(() => {
+      setFeedbackMessage(null);
+    }, 2500);
+  };
+
+  const handleBack = () => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/(tabs)");
+    }
+  };
+
   if (!isLoaded) {
     return null;
   }
@@ -120,7 +143,7 @@ export default function DesignSystemScreen() {
         <View className="mb-4 flex-row items-center justify-between">
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => router.back()}
+            onPress={handleBack}
             className="w-10 h-10 rounded-full bg-white border border-border items-center justify-center shadow-xs"
           >
             <Ionicons name="arrow-back" size={20} color="#0D132B" />
@@ -142,10 +165,20 @@ export default function DesignSystemScreen() {
         {/* Header */}
         <View className="mb-6">
           <Text className="caption font-medium uppercase tracking-widest text-muted">
-            Design System Spec
+            Dev / Design System
           </Text>
           <Text className="h1 text-ink mt-1">Simply Cook</Text>
         </View>
+
+        {/* Feedback message banner if any */}
+        {feedbackMessage ? (
+          <View className="bg-[#E8F8EE] border border-success/40 rounded-2xl p-3 mb-4 flex-row items-center">
+            <Ionicons name="checkmark-circle" size={18} color="#21C16B" />
+            <Text className="text-xs font-semibold text-success ml-2 flex-1">
+              {feedbackMessage}
+            </Text>
+          </View>
+        ) : null}
 
         {/* User Profile Card */}
         <View className="bg-white rounded-3xl p-4 mb-4 shadow-sm border border-border flex-row items-center justify-between">
@@ -167,6 +200,46 @@ export default function DesignSystemScreen() {
           <View className="px-2.5 py-1 rounded-full bg-[#E8F8EE] border border-success/30">
             <Text className="caption font-bold text-success">Online</Text>
           </View>
+        </View>
+
+        {/* PERSISTED FAVORITES STORE MONITOR */}
+        <View className="bg-white rounded-3xl p-5 mb-4 shadow-sm border border-border">
+          <View className="flex-row items-center justify-between mb-3">
+            <View className="flex-row items-center gap-2">
+              <Ionicons name="heart" size={20} color="#FF4D4F" />
+              <Text className="font-bold text-sm text-ink">Zustand Favorites Store</Text>
+            </View>
+            <View className="px-2 py-0.5 rounded-full bg-cream border border-orange/40">
+              <Text className="caption font-bold text-orange text-[10px]">Persisted</Text>
+            </View>
+          </View>
+
+          <Text className="text-xs text-muted mb-2 font-medium">
+            Danh sách Recipe IDs đã bookmark:
+          </Text>
+
+          <View className="bg-surface rounded-2xl p-3 mb-3 border border-border/60">
+            {favoriteRecipeIds.length > 0 ? (
+              <View className="flex-row flex-wrap gap-1.5">
+                {favoriteRecipeIds.map((id) => (
+                  <View key={id} className="bg-white px-2.5 py-1 rounded-full border border-border shadow-xs">
+                    <Text className="caption font-medium text-ink">{id}</Text>
+                  </View>
+                ))}
+              </View>
+            ) : (
+              <Text className="caption text-muted italic">Chưa có công thức nào được lưu</Text>
+            )}
+          </View>
+
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={handleClearFavorites}
+            className="self-start px-3 py-1.5 bg-error/10 border border-error/30 rounded-full flex-row items-center gap-1.5"
+          >
+            <Ionicons name="trash-outline" size={14} color="#FF4D4F" />
+            <Text className="caption font-semibold text-error">Clear Favorites</Text>
+          </TouchableOpacity>
         </View>
 
         {/* 1. BRAND SECTION */}

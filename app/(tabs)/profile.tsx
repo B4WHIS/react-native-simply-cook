@@ -17,20 +17,14 @@ export default function ProfileScreen() {
         <View className="w-24 h-24 rounded-full bg-[#FFE69B] items-center justify-center mb-4 border-2 border-[#FEB11F] overflow-hidden shadow-sm">
           <Image
             source={images.authChick}
-            style={{ width: 70, height: 70 }}
+            className="w-[70px] h-[70px]"
             resizeMode="contain"
           />
         </View>
-        <Text
-          className="text-2xl font-bold text-ink mb-1"
-          style={{ fontFamily: "FZPoppins-Bold" }}
-        >
+        <Text className="text-2xl font-bold text-ink mb-1">
           {user?.fullName || "Bếp Trưởng Tập Sự"}
         </Text>
-        <Text
-          className="text-sm text-muted mb-8"
-          style={{ fontFamily: "FZPoppins-Regular" }}
-        >
+        <Text className="text-sm text-muted mb-8 font-regular">
           {user?.primaryEmailAddress?.emailAddress || "Chưa có email"}
         </Text>
 
@@ -42,10 +36,7 @@ export default function ProfileScreen() {
         >
           <View className="flex-row items-center gap-2.5">
             <Ionicons name="color-palette-outline" size={20} color="#FFA927" />
-            <Text
-              className="text-sm font-semibold text-ink"
-              style={{ fontFamily: "FZPoppins-SemiBold" }}
-            >
+            <Text className="text-sm font-semibold text-ink">
               Design System Spec
             </Text>
           </View>
@@ -58,10 +49,7 @@ export default function ProfileScreen() {
           onPress={() => signOut()}
           className="w-full max-w-[280px] py-3.5 rounded-full bg-white border border-[#E5E7EB] items-center justify-center shadow-xs"
         >
-          <Text
-            className="text-sm font-semibold text-error"
-            style={{ fontFamily: "FZPoppins-SemiBold" }}
-          >
+          <Text className="text-sm font-semibold text-error">
             Đăng xuất
           </Text>
         </TouchableOpacity>
