@@ -309,18 +309,14 @@ export default function SignInScreen() {
             <View className="w-full items-center">
               <Image
                 source={images.authChick}
-                style={{
-                  width: isKeyboardVisible ? 140 : 240,
-                  height: isKeyboardVisible ? 95 : 180,
-                }}
+                className={
+                  isKeyboardVisible ? "w-[140px] h-[95px]" : "w-[240px] h-[180px]"
+                }
                 resizeMode="contain"
                 accessibilityElementsHidden
                 importantForAccessibility="no"
               />
-              <Text
-                className="font-bold text-3xl text-ink text-center tracking-tight mt-1"
-                style={{ lineHeight: 38, paddingTop: 2 }}
-              >
+              <Text className="font-bold text-3xl text-ink text-center tracking-tight mt-1 leading-[38px] pt-0.5">
                 Chào mừng bạn <Text className="text-[#D97706]">trở lại</Text>
               </Text>
             </View>

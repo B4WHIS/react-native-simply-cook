@@ -55,10 +55,14 @@ export const AuthTextField = forwardRef<TextInput, AuthTextFieldProps>(
       <View className="mb-3">
         <Text className="text-xs font-semibold text-ink mb-1.5 ml-4">{label}</Text>
         <View
-          className="w-full h-14 rounded-full bg-white flex-row items-center px-4"
+          className={`w-full h-14 rounded-full bg-white flex-row items-center px-4 border-[1.5px] ${
+            error
+              ? "border-red-500"
+              : focused
+              ? "border-[#D97706]"
+              : "border-gray-200"
+          }`}
           style={{
-            borderWidth: 1.5,
-            borderColor: error ? "#EF4444" : focused ? "#D97706" : "#E5E7EB",
             shadowColor: focused ? "#D97706" : "#000",
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: focused ? 0.12 : 0.04,
@@ -86,8 +90,7 @@ export const AuthTextField = forwardRef<TextInput, AuthTextFieldProps>(
             autoCorrect={false}
             autoComplete={autoComplete}
             textContentType={textContentType}
-            className="flex-1 font-medium text-base text-ink"
-            style={{ height: "100%" }}
+            className="flex-1 font-medium text-base text-ink h-full"
             returnKeyType={returnKeyType}
             onSubmitEditing={onSubmitEditing}
             accessibilityLabel={accessibilityLabel}

@@ -168,12 +168,7 @@ function ModalBody({
         caretHidden
         textContentType="oneTimeCode"
         autoComplete="one-time-code"
-        style={{
-          position: "absolute",
-          width: 1,
-          height: 1,
-          opacity: 0.01,
-        }}
+        className="absolute w-px h-px opacity-0"
       />
 
       {/* 6 Digit Input Display Boxes */}
@@ -189,25 +184,16 @@ function ModalBody({
           return (
             <View
               key={index}
-              style={{
-                width: 44,
-                height: 52,
-                borderRadius: 14,
-                borderWidth: isCurrent ? 2 : 1.5,
-                borderColor: isVerifying
-                  ? "#21C16B"
+              className={`w-[44px] h-[52px] rounded-[14px] items-center justify-center ${
+                isVerifying
+                  ? "border-2 border-[#21C16B] bg-white"
                   : isCurrent
-                  ? "#FEB11F"
+                  ? "border-2 border-[#FEB11F] bg-[#FFFDF7]"
                   : isFilled
-                  ? "#0D132B"
-                  : "#E5E7EB",
-                backgroundColor: isCurrent
-                  ? "#FFFDF7"
-                  : isFilled
-                  ? "#FFFFFF"
-                  : "#F9FAFB",
-                justifyContent: "center",
-                alignItems: "center",
+                  ? "border-[1.5px] border-[#0D132B] bg-white"
+                  : "border-[1.5px] border-[#E5E7EB] bg-[#F9FAFB]"
+              }`}
+              style={{
                 shadowColor: isCurrent ? "#FEB11F" : "#000",
                 shadowOffset: { width: 0, height: 1 },
                 shadowOpacity: isCurrent ? 0.2 : 0.05,
@@ -294,15 +280,7 @@ export function VerificationModal({
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "rgba(13, 19, 43, 0.45)",
-              justifyContent: "center",
-              alignItems: "center",
-              paddingHorizontal: 20,
-            }}
-          >
+          <View className="flex-1 bg-[#0D132B]/45 justify-center items-center px-5">
             <TouchableWithoutFeedback>
               <ModalBody
                 email={email}

@@ -4,73 +4,17 @@ export function AuthBackground() {
   return (
     <View pointerEvents="none" className="absolute inset-0 overflow-hidden">
       {/* Top-left organic accent wave */}
-      <View
-        style={{
-          position: "absolute",
-          top: -70,
-          left: -70,
-          width: 220,
-          height: 220,
-          borderRadius: 110,
-          backgroundColor: "#FFEAB6",
-          opacity: 0.75,
-        }}
-      />
+      <View className="absolute -top-[70px] -left-[70px] w-[220px] h-[220px] rounded-full bg-[#FFEAB6] opacity-75" />
       {/* Top-left floating pill dot */}
-      <View
-        style={{
-          position: "absolute",
-          top: 65,
-          left: 42,
-          width: 13,
-          height: 24,
-          borderRadius: 7,
-          backgroundColor: "#FED885",
-          transform: [{ rotate: "42deg" }],
-        }}
-      />
+      <View className="absolute top-[65px] left-[42px] w-[13px] h-[24px] rounded-[7px] bg-[#FED885] rotate-[42deg]" />
 
       {/* Bottom-right organic accent wave */}
-      <View
-        style={{
-          position: "absolute",
-          bottom: -80,
-          right: -80,
-          width: 250,
-          height: 250,
-          borderRadius: 125,
-          backgroundColor: "#FFEAB6",
-          opacity: 0.75,
-        }}
-      />
+      <View className="absolute -bottom-[80px] -right-[80px] w-[250px] h-[250px] rounded-full bg-[#FFEAB6] opacity-75" />
       {/* Bottom-right floating pill dot */}
-      <View
-        style={{
-          position: "absolute",
-          bottom: 78,
-          right: 48,
-          width: 13,
-          height: 24,
-          borderRadius: 7,
-          backgroundColor: "#FED885",
-          transform: [{ rotate: "42deg" }],
-        }}
-      />
+      <View className="absolute bottom-[78px] right-[48px] w-[13px] h-[24px] rounded-[7px] bg-[#FED885] rotate-[42deg]" />
 
       {/* Bottom-left floating pill dot */}
-      <View
-        style={{
-          position: "absolute",
-          bottom: 45,
-          left: 20,
-          width: 11,
-          height: 22,
-          borderRadius: 6,
-          backgroundColor: "#FED885",
-          opacity: 0.65,
-          transform: [{ rotate: "45deg" }],
-        }}
-      />
+      <View className="absolute bottom-[45px] left-[20px] w-[11px] h-[22px] rounded-[6px] bg-[#FED885] opacity-65 rotate-45" />
     </View>
   );
 }

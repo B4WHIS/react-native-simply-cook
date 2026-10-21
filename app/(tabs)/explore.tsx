@@ -10,16 +10,10 @@ export default function ExploreScreen() {
         <View className="w-16 h-16 rounded-full bg-[#FFE69B]/50 items-center justify-center mb-4 border border-[#FFB873]/30">
           <Ionicons name="search" size={32} color="#FFA927" />
         </View>
-        <Text
-          className="text-2xl font-bold text-ink mb-2"
-          style={{ fontFamily: "FZPoppins-Bold" }}
-        >
+        <Text className="text-2xl font-bold text-ink mb-2">
           Khám phá công thức
         </Text>
-        <Text
-          className="text-sm text-muted text-center"
-          style={{ fontFamily: "FZPoppins-Regular" }}
-        >
+        <Text className="text-sm text-muted text-center font-regular">
           Tìm kiếm hàng trăm món ngon hấp dẫn cho bữa cơm gia đình bạn.
         </Text>
       </View>

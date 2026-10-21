@@ -29,7 +29,7 @@ export function SocialAuthButtons({ onProvider, actionLabel }: SocialAuthButtons
       >
         <Image
           source={images.googleIcon}
-          style={{ width: 22, height: 22 }}
+          className="w-[22px] h-[22px]"
           resizeMode="contain"
           accessibilityLabel="Google icon"
         />
