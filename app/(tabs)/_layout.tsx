@@ -9,7 +9,10 @@ import { images } from "@/constants/images";
 export default function TabLayout() {
   const { isSignedIn, isLoaded } = useAuth();
   const insets = useSafeAreaInsets();
-  const bottomPadding = Platform.OS === "ios" ? Math.max(insets.bottom, 12) : 10;
+  const bottomPadding =
+    Platform.OS === "ios"
+      ? Math.max(insets.bottom, 12)
+      : Math.max(insets.bottom, 10);
   const tabHeight = 62 + bottomPadding;
 
   if (!isLoaded) {

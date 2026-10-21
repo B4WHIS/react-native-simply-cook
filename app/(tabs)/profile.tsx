@@ -31,7 +31,7 @@ export default function ProfileScreen() {
           className="text-sm text-muted mb-8"
           style={{ fontFamily: "FZPoppins-Regular" }}
         >
-          {user?.primaryEmailAddress?.emailAddress || "simplycook@lingua.app"}
+          {user?.primaryEmailAddress?.emailAddress || "Chưa có email"}
         </Text>
 
         {/* Developer Design System Link */}

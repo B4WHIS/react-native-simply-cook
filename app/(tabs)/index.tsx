@@ -1,19 +1,19 @@
-import React, { useState, useMemo } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { RecipeCard } from "@/components/RecipeCard";
 import { images } from "@/constants/images";
 import { categories } from "@/data/categories";
 import { recipes } from "@/data/recipes";
-import { RecipeCard } from "@/components/RecipeCard";
 import type { Recipe } from "@/types/recipe";
+import { Ionicons } from "@expo/vector-icons";
+import { useMemo, useState } from "react";
+import {
+  Image,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // First 5 dish categories from data/categories.ts as shown in the design
 const HOME_CATEGORIES = categories.slice(0, 5).map((cat) => ({
@@ -22,10 +22,20 @@ const HOME_CATEGORIES = categories.slice(0, 5).map((cat) => ({
   image: cat.image ? images[cat.image] : images.catMonKho,
 }));
 
+// Helper to normalize Vietnamese text for diacritic-insensitive search
+const normalizeText = (text: string): string =>
+  (text || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase()
+    .trim();
+
 export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
-    "mon-kho"
+    "mon-kho",
   );
   const [favorites, setFavorites] = useState<Record<string, boolean>>({
     "thit-kho-trung": true,
@@ -48,21 +58,24 @@ export default function HomeScreen() {
   const filteredRecipes = useMemo(() => {
     let result = recipes;
 
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase().trim();
+    const q = normalizeText(searchQuery);
+    if (q) {
       result = result.filter(
         (r) =>
-          r.title.toLowerCase().includes(q) ||
-          r.description.toLowerCase().includes(q)
+          normalizeText(r.title).includes(q) ||
+          normalizeText(r.description).includes(q) ||
+          r.ingredients.some((ing) => normalizeText(ing.name).includes(q)),
       );
     } else if (selectedCategoryId) {
       // If a category is selected, show matching ones first or filter
       const categoryMatches = result.filter(
-        (r) => r.categoryId === selectedCategoryId
+        (r) => r.categoryId === selectedCategoryId,
       );
       if (categoryMatches.length > 0) {
         // Show category matches first, followed by others to keep grid rich
-        const others = result.filter((r) => r.categoryId !== selectedCategoryId);
+        const others = result.filter(
+          (r) => r.categoryId !== selectedCategoryId,
+        );
         result = [...categoryMatches, ...others];
       }
     }
@@ -250,10 +263,14 @@ export default function HomeScreen() {
                   </View>
                   <Text
                     className={`text-[12px] text-center ${
-                      isSelected ? "font-bold text-ink" : "font-medium text-ink/90"
+                      isSelected
+                        ? "font-bold text-ink"
+                        : "font-medium text-ink/90"
                     }`}
                     style={{
-                      fontFamily: isSelected ? "FZPoppins-Bold" : "FZPoppins-Medium",
+                      fontFamily: isSelected
+                        ? "FZPoppins-Bold"
+                        : "FZPoppins-Medium",
                     }}
                   >
                     {cat.name}

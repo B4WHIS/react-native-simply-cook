@@ -1,7 +1,7 @@
 import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
-import { useUser, useClerk } from "@clerk/expo";
+import { useRouter, Redirect } from "expo-router";
+import { useUser, useClerk, useAuth } from "@clerk/expo";
 import { Ionicons } from "@expo/vector-icons";
 import { images } from "@/constants/images";
 import { colors } from "@/constants/theme";
@@ -98,8 +98,17 @@ const TYPE_SCALE = [
 
 export default function DesignSystemScreen() {
   const router = useRouter();
+  const { isSignedIn, isLoaded } = useAuth();
   const { user } = useUser();
   const { signOut } = useClerk();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  if (!isSignedIn) {
+    return <Redirect href="/onboarding" />;
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.surface }}>
