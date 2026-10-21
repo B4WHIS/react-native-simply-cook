@@ -2,7 +2,6 @@ import { RecipeCard } from "@/components/RecipeCard";
 import { images } from "@/constants/images";
 import { categories } from "@/data/categories";
 import { recipes } from "@/data/recipes";
-import { useFavoritesStore } from "@/store/useFavoritesStore";
 import type { Recipe } from "@/types/recipe";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useMemo, useState } from "react";
@@ -55,10 +54,6 @@ export default function HomeScreen() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
     "mon-kho",
   );
-  const favoriteRecipeIds = useFavoritesStore(
-    (state) => state.favoriteRecipeIds
-  );
-  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
 
   const [itemLayouts, setItemLayouts] = useState<
     Record<string, { x: number; y: number; width: number; height: number }>
@@ -425,17 +420,9 @@ export default function HomeScreen() {
                 key={`${first.id}-${second?.id ?? "empty"}`}
                 className="flex-row gap-3.5"
               >
-                <RecipeCard
-                  recipe={first}
-                  isFavorite={favoriteRecipeIds.includes(first.id)}
-                  onToggleFavorite={toggleFavorite}
-                />
+                <RecipeCard recipe={first} />
                 {second ? (
-                  <RecipeCard
-                    recipe={second}
-                    isFavorite={favoriteRecipeIds.includes(second.id)}
-                    onToggleFavorite={toggleFavorite}
-                  />
+                  <RecipeCard recipe={second} />
                 ) : (
                   // Invisible placeholder to keep column spacing balanced
                   <View className="flex-1" />

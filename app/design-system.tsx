@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter, Redirect } from "expo-router";
@@ -108,12 +108,25 @@ export default function DesignSystemScreen() {
   const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
 
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
+  const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (feedbackTimerRef.current) {
+        clearTimeout(feedbackTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleClearFavorites = () => {
     clearFavorites();
     setFeedbackMessage("Đã xóa toàn bộ favorites trong AsyncStorage!");
-    setTimeout(() => {
+    if (feedbackTimerRef.current) {
+      clearTimeout(feedbackTimerRef.current);
+    }
+    feedbackTimerRef.current = setTimeout(() => {
       setFeedbackMessage(null);
+      feedbackTimerRef.current = null;
     }, 2500);
   };
 

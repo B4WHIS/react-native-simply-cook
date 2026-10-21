@@ -16,6 +16,9 @@ export const useFavoritesStore = create<FavoritesState>()(
       favoriteRecipeIds: ["thit-kho-trung", "bo-xao-bong-cai"],
 
       toggleFavorite: (recipeId: string) => {
+        if (!useFavoritesStore.persist.hasHydrated()) {
+          return;
+        }
         const { favoriteRecipeIds } = get();
         const exists = favoriteRecipeIds.includes(recipeId);
         set({
