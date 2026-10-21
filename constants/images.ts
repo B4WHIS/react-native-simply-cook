@@ -29,6 +29,18 @@ const images = {
   thitHeoChayCanh: require("../assets/images/thit-heo-chay-canh.png"),
   thitKhoTrung: require("../assets/images/thit-kho-trung.png"),
   trungChien: require("../assets/images/trung-chien.png"),
+  boXaoBongCai: require("../assets/images/bo-xao-bong-cai.png"),
+  dauHuXaoNam: require("../assets/images/dau-hu-xao-nam.png"),
+
+  // ---- Category illustrations ----
+  catMonKho: require("../assets/images/cat-mon-kho.png"),
+  catMonCanh: require("../assets/images/cat-mon-canh.png"),
+  catMonXao: require("../assets/images/cat-mon-xao.png"),
+  catMonChay: require("../assets/images/cat-mon-chay.png"),
+  catBuaSang: require("../assets/images/cat-bua-sang.png"),
+
+  // ---- Tab navigation icons ----
+  tabChick: require("../assets/images/tab-chick.png"),
 
   // ---- Splash / Icon ----
   splashIcon: require("../assets/images/splash-icon.png"),
