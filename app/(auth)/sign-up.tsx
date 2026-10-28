@@ -18,7 +18,7 @@ import {
   Pressable,
   ScrollView,
   Text,
-  TextInput,
+  type TextInputInstance,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
@@ -44,8 +44,8 @@ export default function SignUpScreen() {
   const { signUp, errors, fetchStatus } = useSignUp();
   const { startSSOFlow } = useSSO();
   const isKeyboardVisible = useKeyboardVisible();
-  const passwordInputRef = useRef<TextInput>(null);
-  const confirmPasswordInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInputInstance>(null);
+  const confirmPasswordInputRef = useRef<TextInputInstance>(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

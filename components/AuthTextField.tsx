@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { forwardRef } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View, type TextInputInstance } from "react-native";
 
 type FeatherIconName = React.ComponentProps<typeof Feather>["name"];
 
@@ -26,7 +26,7 @@ interface AuthTextFieldProps {
   onSubmitEditing?: () => void;
 }
 
-export const AuthTextField = forwardRef<TextInput, AuthTextFieldProps>(
+export const AuthTextField = forwardRef<TextInputInstance, AuthTextFieldProps>(
   function AuthTextField(
     {
       label,

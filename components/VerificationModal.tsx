@@ -9,6 +9,7 @@ import {
   Pressable,
   Text,
   TextInput,
+  type TextInputInstance,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -41,7 +42,7 @@ function ModalBody({
   const [resendSeconds, setResendSeconds] = useState(45);
   const [isVerifying, setIsVerifying] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const inputRef = useRef<TextInput>(null);
+  const inputRef = useRef<TextInputInstance>(null);
   const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Automatically focus input and run resend countdown on mount

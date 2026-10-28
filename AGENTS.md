@@ -37,8 +37,8 @@ You write clean, simple, readable, and maintainable code. You prioritize clarity
 
 ## 2. Tech Stack
 
-- **Framework**: Expo (SDK 57) with Expo Router (File-based routing)
-- **Runtime / Language**: React Native (0.86), React 19, TypeScript (Strict mode)
+- **Framework**: Expo (SDK 58) with Expo Router (File-based routing)
+- **Runtime / Language**: React Native (0.88), React 19, TypeScript (Strict mode)
 - **Styling**: NativeWind (Tailwind CSS)
 - **Client State**: Zustand
 - **Local Persistence**: `@react-native-async-storage/async-storage`

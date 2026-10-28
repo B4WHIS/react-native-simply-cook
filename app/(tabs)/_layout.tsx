@@ -68,7 +68,8 @@ function AnimatedTabIcon({
 function CustomTabBar({
   state,
   descriptors,
-  navigation,
+  emitter,
+  navigateToTab,
   bottomPadding,
   tabHeight,
 }: TabsTabBarProps & { bottomPadding: number; tabHeight: number }) {
@@ -198,19 +199,19 @@ function CustomTabBar({
         const label = getLabel(route.name);
 
         const onPress = () => {
-          const event = navigation.emit({
+          const event = emitter.emit({
             type: "tabPress",
             target: route.key,
             canPreventDefault: true,
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name, route.params);
+            navigateToTab(route.key);
           }
         };
 
         const onLongPress = () => {
-          navigation.emit({
+          emitter.emit({
             type: "tabLongPress",
             target: route.key,
           });
